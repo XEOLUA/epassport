@@ -10,3 +10,10 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.idea
+
+composer.phar
+public/js
+public/css
+public/packages/sleepingowl
+_ide_helper.php
