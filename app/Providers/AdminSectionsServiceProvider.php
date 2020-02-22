@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Menulist;
+use App\Menus;
+use App\User;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 
 class AdminSectionsServiceProvider extends ServiceProvider
@@ -11,7 +14,9 @@ class AdminSectionsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $sections = [
-        //\App\User::class => 'App\Http\Sections\Users',
+        User::class => 'App\Http\Sections\Users',
+        Menus::class => 'App\Http\Sections\Menuses',
+        Menulist::class => 'App\Http\Sections\Menulists',
     ];
 
     /**
