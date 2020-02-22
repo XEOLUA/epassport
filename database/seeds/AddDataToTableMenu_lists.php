@@ -16,26 +16,29 @@ class AddDataToTableMenu_lists extends Seeder
             [
                 'title' => 'Головна',
                 'description' => 'навігація на головну',
-                'link' => '\\',
+                'link' => '/',
                 'menu_id' => 1,
                 'parent_id' => null,
-                'order' => 0
+                'order' => 0,
+                'active' => 0
             ],
             [
                 'title' => 'Реєстрація',
                 'description' => 'навігація на реєстрацію',
-                'link' => '\register',
+                'link' => '/register',
                 'menu_id' => 1,
                 'parent_id' => null,
-                'order' => 0
+                'order' => 0,
+                'active' => 1
             ],
             [
                 'title' => 'Вхід',
                 'description' => 'навігація на авторизацію',
-                'link' => '\login',
+                'link' => '/login',
                 'menu_id' => 1,
                 'parent_id' => null,
-                'order' => 0
+                'order' => 0,
+                'active' => 1
             ]
         ];
 
@@ -47,6 +50,7 @@ class AddDataToTableMenu_lists extends Seeder
                 'menu_id' => $item['menu_id'],
                 'parent_id' => $item['parent_id'],
                 'order' => $item['order'],
+                'active' => $item['active'],
             ]);
         }
     }
