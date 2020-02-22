@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        dd(request()->server('HTTP_ACCEPT_LANGUAGE'));
+
         return view('index');
     }
 }
