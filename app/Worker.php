@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Slider extends Model
+class Worker extends Model
 {
     use \SleepingOwl\Admin\Traits\OrderableModel;
 }
