@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Menulist;
 use App\Slider;
 use App\Worker;
@@ -30,12 +31,14 @@ class HomeController extends Controller
       $mainMenu = Menulist::where(['menu_id'=>'1','active'=>1])->orderBy('order')->get();
       $slider = Slider::where('active',1)->orderBy('order')->get();
       $workers = Worker::where('active',1)->orderBy('order')->get();
+      $articles = Article::where('active',1)->orderBy('order')->get()->take(3);
 
       return view('index',
           [
               'mainMenu'=>$mainMenu,
               'slider'=>$slider,
               'workers'=>$workers,
+              'articles'=>$articles,
           ]);
     }
 

@@ -1,6 +1,6 @@
 <!-- Three columns of text below the carousel -->
 <a name="workers"></a>
-    <h2 align="center" style="padding-bottom: 50px; font-weight: 300;text-transform: uppercase">Над проєктом працюють</h2>
+    <h2 align="center" style="padding: 70px; font-weight: 300;text-transform: uppercase">Над проєктом працюють</h2>
 
 <div class="row">
     @foreach($workers as $item)

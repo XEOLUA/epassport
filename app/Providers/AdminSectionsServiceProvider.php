@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Article;
 use App\Menulist;
 use App\Menus;
 use App\Slider;
@@ -21,6 +22,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Menulist::class => 'App\Http\Sections\Menulists',
         Slider::class => 'App\Http\Sections\Sliders',
         Worker::class => 'App\Http\Sections\Workers',
+        Article::class => 'App\Http\Sections\Articles',
     ];
 
     /**
