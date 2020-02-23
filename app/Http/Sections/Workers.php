@@ -19,13 +19,13 @@ use SleepingOwl\Admin\Form\Buttons\Cancel;
 use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 
 /**
- * Class Sliders
+ * Class Workers
  *
- * @property \App\Slider $model
+ * @property \App\Worker $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Sliders extends Section implements Initializable
+class Workers extends Section implements Initializable
 {
     /**
      * @var bool
@@ -35,7 +35,7 @@ class Sliders extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title="Слайдер";
+    protected $title = "Працівники";
 
     /**
      * @var string
@@ -47,7 +47,7 @@ class Sliders extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-running');
+        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-user-tie');
     }
 
     /**
@@ -59,9 +59,14 @@ class Sliders extends Section implements Initializable
     {
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::image('image', 'Зображення')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumnEditable::text('title', 'Заголовок'),
+            AdminColumn::image('image', 'Світлина')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
+            AdminColumnEditable::text('name', 'ПІБ'),
             AdminColumnEditable::text('description', 'Опис'),
+            AdminColumnEditable::text('position', 'Посада')->setWidth('150px'),
+            AdminColumnEditable::select('sex')->setLabel('Стать')->setWidth('150px')
+                ->setOptions(['жіноча','чоловіча'])
+                ->setDisplay('Стать')
+                ->setTitle('Оберіть стать:'),
             AdminColumnEditable::checkbox('active', 'Показати'),
             AdminColumn::order('order')->setLabel('Порядок')->setWidth('90px'),
         ];
@@ -88,13 +93,15 @@ class Sliders extends Section implements Initializable
     {
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('title', 'Заголовок')->required(),
+                AdminFormElement::text('name', 'ПІБ')->required(),
                 AdminFormElement::textarea('description', 'Опис'),
-                AdminFormElement::text('link', 'URL'),
-                AdminFormElement::html('last AdminFormElement without comma')
+                AdminFormElement::text('position', 'посада'),
+                AdminFormElement::text('email', 'E-mail'),
             ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
                 AdminFormElement::text('id', 'ID')->setReadonly(true),
                 AdminFormElement::image('image', 'Зображення'),
+                AdminFormElement::checkbox('active', 'Відображати'),
+                AdminFormElement::number('order', 'Порядок'),
             ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
         ]);
 
