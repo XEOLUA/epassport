@@ -28,7 +28,7 @@ class AddDataToTableMenu_lists extends Seeder
                 'link' => '/register',
                 'menu_id' => 1,
                 'parent_id' => null,
-                'order' => 0,
+                'order' => 1,
                 'active' => 1
             ],
             [
@@ -37,9 +37,27 @@ class AddDataToTableMenu_lists extends Seeder
                 'link' => '/login',
                 'menu_id' => 1,
                 'parent_id' => null,
-                'order' => 0,
+                'order' => 2,
                 'active' => 1
-            ]
+            ],
+            [
+                'title' => 'Автори',
+                'description' => 'Над проєктом працюють',
+                'link' => '#workers',
+                'menu_id' => 1,
+                'parent_id' => null,
+                'order' => 3,
+                'active' => 1
+            ],
+            [
+                'title' => 'Статті',
+                'description' => 'Корисні статті',
+                'link' => '#articles',
+                'menu_id' => 1,
+                'parent_id' => null,
+                'order' => 4,
+                'active' => 1
+            ],
         ];
 
         foreach ($dataArray as $item) {
