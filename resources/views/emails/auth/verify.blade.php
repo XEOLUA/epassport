@@ -1,12 +1,12 @@
 @component('mail::message')
-# Introduction
+# Наші вітання!
 
-The body of your message.
+Натисніть "Активувати обіковий запис", щоб здійснити вхід на сайті E-pass. (одноразово)
 
 @component('mail::button', ['url' => route('register.verify', ['token' => $user->verify_token])])
-    Verify Email
+    Активувати обіковий запис
 @endcomponent
 
-Thanks,<br>
+Дякуємо,<br>
 {{ config('app.name') }}
 @endcomponent
