@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 
     Route::get('/', 'HomeController@index')->name('index');
-
+Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
