@@ -102,7 +102,6 @@ class Menulists extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
-
         $menuBlocks = Menus::pluck('title','id')->toArray();
         $menuList = Menulist::pluck('title','id')->toArray();
         $menuList[0] = 'root';

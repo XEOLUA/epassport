@@ -33,6 +33,8 @@ class HomeController extends Controller
       $workers = Worker::where('active',1)->orderBy('order')->get();
       $articles = Article::where('active',1)->orderBy('order')->get()->take(3);
 
+//      dd(auth()->user()->role);
+
       return view('index',
           [
               'mainMenu'=>$mainMenu,
