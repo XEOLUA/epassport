@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Article;
 use App\Menulist;
 use App\Menus;
+use App\Quastion;
 use App\Slider;
+use App\Test;
 use App\User;
 use App\Worker;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
@@ -23,6 +25,8 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Slider::class => 'App\Http\Sections\Sliders',
         Worker::class => 'App\Http\Sections\Workers',
         Article::class => 'App\Http\Sections\Articles',
+        Test::class => 'App\Http\Sections\Tests',
+        Quastion::class => 'App\Http\Sections\Quastions',
     ];
 
     /**
