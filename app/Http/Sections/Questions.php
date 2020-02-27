@@ -18,13 +18,13 @@ use SleepingOwl\Admin\Form\Buttons\Cancel;
 use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 
 /**
- * Class Quastions
+ * Class Questions
  *
- * @property \App\Quastion $model
+ * @property \App\Question $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Quastions extends Section implements Initializable
+class Questions extends Section implements Initializable
 {
     /**
      * @var bool
@@ -90,7 +90,7 @@ class Quastions extends Section implements Initializable
 
         $display->setColumnFilters([
             AdminColumnFilter::select()
-                ->setModelForOptions(\App\Quastion::class, 'name')
+                ->setModelForOptions(\App\Question::class, 'name')
                 ->setLoadOptionsQueryPreparer(function($element, $query) {
                     return $query;
                 })

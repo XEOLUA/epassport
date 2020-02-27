@@ -87,26 +87,72 @@ class Tests extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
-        $form = AdminForm::card()->addBody([
-                AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('title', 'Назва тесту')->required(),
-                AdminFormElement::textarea('description', 'Опис')->setRows(7),
-                AdminFormElement::checkbox('active', 'Відкрити'),
-                AdminFormElement::number('order', 'Порядок'),
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-8')->addColumn([
-                AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::image('image', 'Зображення'),
-            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-4'),
-        ]);
-
-        $form->getButtons()->setButtons([
-            'save'  => new Save(),
-            'save_and_close'  => new SaveAndClose(),
-            'save_and_create'  => new SaveAndCreate(),
-            'cancel'  => (new Cancel()),
-        ]);
+        $form = AdminForm::panel();
+        $form->setItems(
+            AdminFormElement::columns()
+                ->addColumn(function () {
+                    return [
+                        $question = AdminFormElement::text('title', 'Тест')
+                            ->setHtmlAttribute('placeholder', 'Назва теста')
+                            ->setHtmlAttribute('maxlength', '255')
+                            ->setHtmlAttribute('minlength', '1')
+                            ->setValidationRules([
+                                'required', 'string', 'between:1,255',
+                            ]),
+                        AdminFormElement::textarea('description','Опис')->setRows(2),
+                        AdminFormElement::text('settings','Налаштування'),
+                        $active = AdminFormElement::checkbox('active','Активный')
+                            ->setValidationRules(['boolean']),
+                        AdminFormElement::number('order','Порядок'),
+                        AdminFormElement::image('image','Зображення'),
+                    ];
+                },'col-xs-3 col-sm-6 col-md-8 col-lg-3')->addColumn(function () {
+                    return [
+                        AdminFormElement::hasMany('relshipTestsQuestions', [
+                        AdminFormElement::text('text','Питання')
+                                ->setHtmlAttribute('placeholder','Питання')
+                                ->setHtmlAttribute('maxlength', '255')
+                                ->setHtmlAttribute('minlength', '1')
+                                ->setValidationRules([
+                                    'required', 'string', 'between:1,255',
+                                ]),
+                        AdminFormElement::number('bal','Бал'),
+                        AdminFormElement::checkbox('active','Видимість'),
+//                        AdminFormElement::image('image','Зображення'),
+                        ]),
+                    ];
+                },'col-xs-12 col-sm-6 col-md-8 col-lg-9')
+//                ->addColumn(function (){
+//                return [
+//                    AdminFormElement::hasMany('relshipQuestionsAnswers', [
+//                    AdminFormElement::text('text','Текст відповіді'),
+//                        ]),
+//                ];
+//            })
+        );
 
         return $form;
+
+//        $form = AdminForm::card()->addBody([
+//                AdminFormElement::columns()->addColumn([
+//                AdminFormElement::text('title', 'Назва тесту')->required(),
+//                AdminFormElement::textarea('description', 'Опис')->setRows(7),
+//                AdminFormElement::checkbox('active', 'Відкрити'),
+//                AdminFormElement::number('order', 'Порядок'),
+//            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-8')->addColumn([
+//                AdminFormElement::text('id', 'ID')->setReadonly(true),
+//                AdminFormElement::image('image', 'Зображення'),
+//            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-4'),
+//        ]);
+//
+//        $form->getButtons()->setButtons([
+//            'save'  => new Save(),
+//            'save_and_close'  => new SaveAndClose(),
+//            'save_and_create'  => new SaveAndCreate(),
+//            'cancel'  => (new Cancel()),
+//        ]);
+//
+//        return $form;
     }
 
     /**

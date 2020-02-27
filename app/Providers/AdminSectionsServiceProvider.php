@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Article;
 use App\Menulist;
+use App\Question;
 use App\Menus;
-use App\Quastion;
 use App\Slider;
 use App\Test;
 use App\User;
@@ -26,7 +26,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Worker::class => 'App\Http\Sections\Workers',
         Article::class => 'App\Http\Sections\Articles',
         Test::class => 'App\Http\Sections\Tests',
-        Quastion::class => 'App\Http\Sections\Quastions',
+        Question::class => 'App\Http\Sections\Questions',
     ];
 
     /**
