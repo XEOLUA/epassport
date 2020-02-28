@@ -2,11 +2,15 @@
 
 namespace App\Http\Sections;
 
+use AdminColumnEditable;
 use AdminDisplay;
 use AdminColumn;
+use AdminDisplayFilter;
 use AdminForm;
 use AdminFormElement;
 use AdminColumnFilter;
+use App\Question;
+use App\Test;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -56,51 +60,49 @@ class Questions extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
+        $display = AdminDisplay::datatablesAsync()->setDatatableAttributes(['bInfo' => false])->setDisplaySearch(true)->paginate(10);
+
+        $display->setHtmlAttribute('class', 'table-info table-hover');
+        $display->with('relshipTestsQuestions', 'relshipQuestionsTests');
+
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::link('name', 'Name', 'created_at')
-                ->setSearchCallback(function($column, $query, $search){
-                    return $query
-                        ->orWhere('name', 'like', '%'.$search.'%')
-                        ->orWhere('created_at', 'like', '%'.$search.'%')
-                    ;
-                })
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('created_at', $direction);
-                })
-            ,
-            AdminColumn::boolean('name', 'On'),
-            AdminColumn::text('created_at', 'Created / updated', 'updated_at')
-                ->setWidth('160px')
-                ->setOrderable(function($query, $direction) {
-                    $query->orderBy('updated_at', $direction);
-                })
-                ->setSearchable(false)
-            ,
+            AdminColumnEditable::text('text', 'Питання'),
+            AdminColumnEditable::select('type')->setLabel('Тип питання')->setWidth('250px')
+                ->setOptions(['Один', 'Багато', 'Відкрите'])
+                ->setDisplay('Тип')
+                ->setTitle('Оберіть тип:'),
+//            AdminColumnEditable::text('description', 'Опис'),
+            AdminColumnEditable::checkbox('active', 'Відкрито')->setWidth('120px'),
+            AdminColumn::relatedLink('relshipQuestionsTests.title','Тест'),
+            AdminColumn::count('relshipQuestionsAnswers', 'Відповідей'),
+            AdminColumn::order('order')->setLabel('Порядок')->setWidth('90px'),
+            AdminColumn::image('image', 'Світлина')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
+            AdminColumn::datetime('created_at')->setLabel('Дата')->setWidth('90px'),
         ];
 
+        $display = AdminDisplay::datatables()
+            ->setApply(function ($query) {
+                $query->orderBy('order', 'asc');
+            })
+            ->paginate(25)
+            ->setColumns($columns)
+//            ->setHtmlAttribute('class', 'table-primary table-hover th-center')
+        ;
         $display = AdminDisplay::datatables()
             ->setName('firstdatatables')
             ->setOrder([[0, 'asc']])
             ->setDisplaySearch(true)
             ->paginate(25)
             ->setColumns($columns)
-            ->setHtmlAttribute('class', 'table-primary table-hover th-center')
+//            ->setHtmlAttribute('class', 'table-primary table-hover th-center')
         ;
 
         $display->setColumnFilters([
-            AdminColumnFilter::select()
-                ->setModelForOptions(\App\Question::class, 'name')
-                ->setLoadOptionsQueryPreparer(function($element, $query) {
-                    return $query;
-                })
-                ->setDisplay('name')
-                ->setColumnName('name')
-                ->setPlaceholder('All names')
-            ,
+            null,
+            AdminColumnFilter::select(new Test, 'test_id')->setDisplay('title')->setPlaceholder('Оберіть тест')->setColumnName('test_id'),
         ]);
         $display->getColumnFilters()->setPlacement('card.heading');
-
         return $display;
     }
 
@@ -112,29 +114,52 @@ class Questions extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
-        $form = AdminForm::card()->addBody([
-            AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('name', 'Name')
-                    ->required()
-                ,
-                AdminFormElement::html('<hr>'),
-                AdminFormElement::datetime('created_at')
-                    ->setVisible(true)
-                    ->setReadonly(false)
-                ,
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
-                AdminFormElement::text('id', 'ID')->setReadonly(true),
-                AdminFormElement::html('last AdminFormElement without comma')
-            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
-        ]);
-
-        $form->getButtons()->setButtons([
-            'save'  => new Save(),
-            'save_and_close'  => new SaveAndClose(),
-            'save_and_create'  => new SaveAndCreate(),
-            'cancel'  => (new Cancel()),
-        ]);
+        $form = AdminForm::panel();
+        $form->setItems(
+            AdminFormElement::columns()
+                ->addColumn(function () {
+                    return [
+                        $question = AdminFormElement::text('text', 'Питання')
+                            ->setHtmlAttribute('placeholder', 'Назва питання')
+                            ->setHtmlAttribute('maxlength', '255')
+                            ->setHtmlAttribute('minlength', '1')
+                            ->setValidationRules([
+                                'required', 'string', 'between:1,255',
+                            ]),
+                        AdminFormElement::textarea('description','Опис')->setRows(2),
+                        AdminFormElement::number('bal','Бал'),
+                        $active = AdminFormElement::checkbox('active','Активный')
+                            ->setValidationRules(['boolean']),
+                        AdminFormElement::number('order','Порядок'),
+                        AdminFormElement::image('image','Зображення'),
+                    ];
+                },'col-xs-3 col-sm-6 col-md-8 col-lg-3')->addColumn(function () {
+                    return [
+                        AdminFormElement::hasMany('relshipQuestionsAnswers', [
+                            AdminFormElement::text('text','Відповідь')
+                                ->setHtmlAttribute('placeholder','Відповідь')
+                                ->setHtmlAttribute('maxlength', '255')
+                                ->setHtmlAttribute('minlength', '1')
+                                ->setValidationRules([
+                                    'required', 'string', 'between:1,255',
+                                ]),
+                            AdminFormElement::number('bal','Бал')->required()
+                                ->setHtmlAttribute('placeholder',1)->setDefaultValue(1),
+                            AdminFormElement::checkbox('active')->setLabel('Видимість')
+//                                ->setHtmlAttribute('checked','true')
+                            ,
+                        AdminFormElement::image('image','Зображення'),
+                        ]),
+                    ];
+                },'col-xs-12 col-sm-6 col-md-8 col-lg-9')
+//                ->addColumn(function (){
+//                return [
+//                    AdminFormElement::hasMany('relshipQuestionsAnswers', [
+//                    AdminFormElement::text('text','Текст відповіді'),
+//                        ]),
+//                ];
+//            })
+        );
 
         return $form;
     }
@@ -144,7 +169,8 @@ class Questions extends Section implements Initializable
      */
     public function onCreate($payload = [])
     {
-        return $this->onEdit(null, $payload);
+        return "Питання створювати можна тільки в <a href=/admin/tests/>Тестах</a>";
+//        return $this->onEdit(null, $payload);
     }
 
     /**

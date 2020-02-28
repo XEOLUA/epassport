@@ -62,7 +62,8 @@ class Tests extends Section implements Initializable
             AdminColumn::image('image', 'Світлина')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumnEditable::text('title', 'Назва тесту'),
             AdminColumnEditable::text('description', 'Опис'),
-            AdminColumnEditable::checkbox('active', 'Відкрито'),
+            AdminColumnEditable::checkbox('active', 'Відкрито')->setWidth('120px'),
+            AdminColumn::count('relshipTestsQuestions', 'Питань'),
             AdminColumn::order('order')->setLabel('Порядок')->setWidth('90px'),
             AdminColumn::datetime('created_at')->setLabel('Дата')->setWidth('90px'),
         ];
@@ -116,7 +117,12 @@ class Tests extends Section implements Initializable
                                 ->setValidationRules([
                                     'required', 'string', 'between:1,255',
                                 ]),
-                        AdminFormElement::number('bal','Бал'),
+                        AdminFormElement::number('bal','Бал')->required()->setDefaultValue(1),
+                            AdminFormElement::select('type')->setLabel('Тип питання')
+                                ->setOptions(['Один', 'Багато', 'Відкрите'])
+                                ->setDisplay('Тип')
+//                                ->setTitle('Оберіть тип:')
+                            ,
                         AdminFormElement::checkbox('active','Видимість'),
 //                        AdminFormElement::image('image','Зображення'),
                         ]),

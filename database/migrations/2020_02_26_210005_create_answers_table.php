@@ -28,7 +28,7 @@ class CreateAnswersTable extends Migration
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
 
-
+        Artisan::call('db:seed', array('--class' => 'AddDataToTableAnswers'));
     }
 
     /**
