@@ -23,6 +23,8 @@ class CreateTestsTable extends Migration
             $table->string('image')->nullable();
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', array('--class' => 'AddDataToTests'));
     }
 
     /**

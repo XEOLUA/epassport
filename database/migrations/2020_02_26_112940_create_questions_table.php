@@ -19,6 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->string('text');
             $table->string('description')->nullable();
             $table->integer('bal')->default(0);
+            $table->integer('type')->default(0);
             $table->boolean('active')->default(1);
             $table->integer('order')->default(1);
             $table->string('image')->nullable();
@@ -26,6 +27,8 @@ class CreateQuestionsTable extends Migration
 
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
         });
+
+        Artisan::call('db:seed', array('--class' => 'AddDataToTableQuestions'));
     }
 
     /**

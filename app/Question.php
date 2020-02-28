@@ -12,4 +12,8 @@ class Question extends Model
     {
         return $this->hasMany('App\Answer', 'question_id', 'id');
     }
+    public function relshipQuestionsTests()
+    {
+        return $this->belongsTo('App\Test', 'test_id', 'id');
+    }
 }
