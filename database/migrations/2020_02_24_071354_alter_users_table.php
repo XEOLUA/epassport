@@ -19,7 +19,7 @@ class AlterUsersTable extends Migration
             $table->date('birthday')->after('sex');
             $table->string('address')->after('birthday')->nullable();
             $table->integer('year_in')->after('address');
-            $table->string('parents')->after('year_in');
+            $table->string('parents')->after('year_in')->nullable();
             $table->integer('role')->after('parents');
         });
     }

@@ -14,10 +14,11 @@
 use App\Http\Middleware\LocaleMiddleware;
 use Illuminate\Support\Facades\Auth;
 
-
-
-    Route::get('/', 'HomeController@index')->name('index');
+Route::get('/', 'HomeController@index')->name('index');
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
+Route::get('/profile', 'ProfileController@show')->name('profile');
+Route::post('/profile', 'ProfileController@edit')->name('editprofile');
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
