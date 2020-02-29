@@ -165,6 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -177,7 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\ComposerServiceProvider::class,
     ],
 
     /*

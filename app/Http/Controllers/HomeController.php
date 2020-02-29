@@ -28,7 +28,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $mainMenu = Menulist::where(['menu_id'=>'1','active'=>1])->orderBy('order')->get();
       $slider = Slider::where('active',1)->orderBy('order')->get();
       $workers = Worker::where('active',1)->orderBy('order')->get();
       $articles = Article::where('active',1)->orderBy('order')->get()->take(3);
@@ -37,7 +36,6 @@ class HomeController extends Controller
 
       return view('index',
           [
-              'mainMenu'=>$mainMenu,
               'slider'=>$slider,
               'workers'=>$workers,
               'articles'=>$articles,

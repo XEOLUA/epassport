@@ -1,24 +1,43 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/">E-pass</a>
-
+{{--        <a class="navbar-brand" href="/">E-pass</a>--}}
+        <a href="{{route('index')}}"><img src="/images/logo.svg" height="40" title="Головна"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left: 10px;">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{route('index')}}">Головна</a>
+                </li>
                 @foreach($mainMenu as $item)
                     <li class="nav-item active">
-                        @if (($item->link!='/register' && $item->link!='/login') ||
-                            (!Auth::check() && ($item->link=='/register' || $item->link=='/login')))
-                        <a class="nav-link" href="{{$item->link}}">{{$item->title}}</a>
-                        @endif
+                        <a class="nav-link" href="/{{$item->link}}">{{$item->title}}</a>
                     </li>
                 @endforeach
+                @if(Auth::check())
+                    @foreach($userMenu as $item)
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{$item->link}}">{{$item->title}}</a>
+                        </li>
+                    @endforeach
+                @endif
+                @if(!auth()->check())
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('register')}}">Реєстрація</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('login')}}">Вхід</a>
+                    </li>
+                @else
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('profile')}}">Профіль</a>
+                    </li>
+                @endif
 
  @if(Auth::check())
     <div onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
+        document.getElementById('logout-form').submit();">
         <center style="cursor:pointer">{{Auth::user()->name}}[{{ ('Вихід') }}]</center>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
