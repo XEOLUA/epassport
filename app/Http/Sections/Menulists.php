@@ -78,6 +78,7 @@ class Menulists extends Section implements Initializable
 //            AdminColumn::text('order'),
             AdminColumn::order('order')->setLabel('Порядок')->setWidth('90px'),
             AdminColumnEditable::checkbox('active','Опубліковано')->setWidth('150px'),
+            AdminColumn::image('image','Зображення'),
         ];
 
         $display = AdminDisplay::datatables()

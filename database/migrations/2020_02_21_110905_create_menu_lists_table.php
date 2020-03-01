@@ -23,6 +23,7 @@ class CreateMenuListsTable extends Migration
             $table->string('settings')->nullable();
             $table->boolean('active')->default(1);
             $table->integer('order')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->unique(['id']);
