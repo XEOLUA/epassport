@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class StudentsController extends Controller
 {
     public function show(){
-        if(auth()->user()->role==2 || auth()->user()->role==0)
+
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0))
         {
             $students = User::where('role',1)->where('status',1)->orderBy('name')->get();
             $abetka = [];
@@ -35,7 +36,7 @@ class StudentsController extends Controller
     }
 
     public function abetka($alpha){
-        if(auth()->user()->role==2 || auth()->user()->role==0)
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0))
         {
             $students = User::where('role',1)->where('name','like',$alpha.'%')->where('status',1)->orderBy('name')->get();
 
@@ -48,7 +49,7 @@ class StudentsController extends Controller
     }
 
     public function groups($group){
-        if(auth()->user()->role==2 || auth()->user()->role==0)
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0))
         {
             $students = User::where('role',1)->where('group',$group)->where('status',1)->orderBy('name')->get();
 
@@ -61,7 +62,7 @@ class StudentsController extends Controller
     }
 
     public function years($year){
-        if(auth()->user()->role==2 || auth()->user()->role==0)
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0))
         {
             $students = User::where('role',1)->where('year_in',$year)->where('status',1)->orderBy('name')->get();
 
@@ -75,7 +76,7 @@ class StudentsController extends Controller
 
     public function cabinet($id){
 
-        if(auth()->user()->role==2 || auth()->user()->role==0 || $id==auth()-user()->id)
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $id==auth()-user()->id))
         {
             $passportMenu = Menulist::where(['menu_id'=>'3','active'=>1])->orderBy('order')->get();
             $student = User::where('role',1)->where('id',$id)->where('status',1)->get();
