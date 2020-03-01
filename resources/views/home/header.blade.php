@@ -15,12 +15,23 @@
                         <a class="nav-link" href="/{{$item->link}}">{{$item->title}}</a>
                     </li>
                 @endforeach
+
                 @if(Auth::check())
-                    @foreach($userMenu as $item)
+                    @if(auth()->user()->role==0 || auth()->user()->role==2)
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{$item->link}}">{{$item->title}}</a>
+                            <a class="nav-link" href="/students">Студенти</a>
                         </li>
-                    @endforeach
+                    @endif
+                    @if(auth()->user()->role==1)
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/cabinet/{{auth()->user()->id}}">Кабінет</a>
+                        </li>
+                    @endif
+{{--                    @foreach($userMenu as $item)--}}
+{{--                        <li class="nav-item active">--}}
+{{--                            <a class="nav-link" href="{{$item->link}}">{{$item->title}}</a>--}}
+{{--                        </li>--}}
+{{--                    @endforeach--}}
                 @endif
                 @if(!auth()->check())
                     <li class="nav-item active">
@@ -36,14 +47,16 @@
                 @endif
 
  @if(Auth::check())
+    <li class="nav-item active">
     <div onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
-        <center style="cursor:pointer">{{Auth::user()->name}}[{{ ('Вихід') }}]</center>
+        <center style="cursor:pointer">{{explode("@",Auth::user()->email)[0]}}[{{ ('Вихід') }}]</center>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
     </div>
+    </li>
  @endif
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link" href="#">Link</a>--}}

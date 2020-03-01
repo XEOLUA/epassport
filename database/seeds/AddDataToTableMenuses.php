@@ -21,6 +21,10 @@ class AddDataToTableMenuses extends Seeder
             [
                 'title' => 'Користувацький',
                 'description' => 'Меню авторизваного користувача',
+            ],
+            [
+                'title' => 'Паспорт',
+                'description' => 'Пункти діагностування',
             ]
         ];
 

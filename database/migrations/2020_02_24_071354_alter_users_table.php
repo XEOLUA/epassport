@@ -16,12 +16,14 @@ class AlterUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('group')->after('name');
             $table->integer('sex')->after('group')->default(0);
-            $table->date('birthday')->after('sex');
+            $table->date('birthday')->after('sex')->nullable();
             $table->string('address')->after('birthday')->nullable();
             $table->integer('year_in')->after('address');
             $table->string('parents')->after('year_in')->nullable();
             $table->integer('role')->after('parents');
         });
+
+        Artisan::call('db:seed', array('--class' => 'addDefaultUser'));
     }
 
     /**
