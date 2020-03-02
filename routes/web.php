@@ -21,6 +21,7 @@ Route::get('/students', 'StudentsController@show')->name('students');
 Route::get('/students/abetka/{alpha}', 'StudentsController@abetka')->name('abetka');
 Route::get('/students/years/{year}', 'StudentsController@years')->name('years');
 Route::get('/students/groups/{group}', 'StudentsController@groups')->name('groups');
+Route::get('/cabinet/amb/{student_id}', 'StudentsController@ambulat')->name('ambulat');
 Route::get('/cabinet/{id}', 'StudentsController@cabinet')->name('cabinet');
 Route::post('/profile', 'ProfileController@edit')->name('editprofile');
 

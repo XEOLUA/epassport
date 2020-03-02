@@ -167,11 +167,11 @@ class Questions extends Section implements Initializable
     /**
      * @return FormInterface
      */
-    public function onCreate($payload = [])
-    {
-        return "Питання створювати можна тільки в <a href=/admin/tests/>Тестах</a>";
-//        return $this->onEdit(null, $payload);
-    }
+//    public function onCreate($payload = [])
+//    {
+//        return "Питання створювати можна тільки в <a href=/admin/tests/>Тестах</a>";
+////        return $this->onEdit(null, $payload);
+//    }
 
     /**
      * @return bool
