@@ -40,4 +40,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function relshipUsersAmbulcards()
+    {
+        return $this->hasMany('App\Ambulcard', 'user_id', 'id');
+    }
+
 }

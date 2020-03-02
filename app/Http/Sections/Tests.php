@@ -117,7 +117,7 @@ class Tests extends Section implements Initializable
                                 ->setValidationRules([
                                     'required', 'string', 'between:1,255',
                                 ]),
-                        AdminFormElement::number('bal','Бал')->required()->setDefaultValue(1),
+                            AdminFormElement::number('bal','Бал')->required()->setDefaultValue(1),
                             AdminFormElement::select('type')->setLabel('Тип питання')
                                 ->setOptions(['Один', 'Багато', 'Відкрите'])
                                 ->setDisplay('Тип')

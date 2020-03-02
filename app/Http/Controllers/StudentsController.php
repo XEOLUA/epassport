@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ambulcard;
 use App\Menulist;
 use App\User;
 use Illuminate\Http\Request;
@@ -75,8 +76,8 @@ class StudentsController extends Controller
     }
 
     public function cabinet($id){
-
-        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $id==auth()-user()->id))
+//dd(auth()->user());
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $id==auth()->user()->id))
         {
             $passportMenu = Menulist::where(['menu_id'=>'3','active'=>1])->orderBy('order')->get();
             $student = User::where('role',1)->where('id',$id)->where('status',1)->get();
@@ -86,6 +87,21 @@ class StudentsController extends Controller
                 [
                     'student'=>$student,
                     'passportMenu'=>$passportMenu,
+                ]);
+        } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
+    }
+
+    public function ambulat($student_id){
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $student_id==auth()->user()->id))
+        {
+
+            $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
+            $ambulatRecords = Ambulcard::where('user_id',$student_id)->orderBy('updated_at')->orderBy('created_at')->get();
+//            dd($students);
+            return view('ambulat',
+                [
+                    'student'=>$student,
+                    'ambulatRecords' => $ambulatRecords,
                 ]);
         } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
     }
