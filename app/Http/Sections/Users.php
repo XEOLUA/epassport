@@ -65,7 +65,7 @@ class Users extends Section implements Initializable
 
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::link('name', 'ПІБ', 'created_at')
+            AdminColumnEditable::text('name', 'ПІБ', 'created_at')
                 ->setSearchCallback(function($column, $query, $search){
                     return $query
                         ->orWhere('name', 'like', '%'.$search.'%')

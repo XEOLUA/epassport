@@ -20,13 +20,13 @@ use SleepingOwl\Admin\Form\Buttons\Cancel;
 use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 
 /**
- * Class Ambulcards
+ * Class Anamnestcards
  *
- * @property \App\Ambulcard $model
+ * @property \App\Anamnest $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Ambulcards extends Section implements Initializable
+class Anamnestcards extends Section implements Initializable
 {
     /**
      * @var bool
@@ -36,7 +36,7 @@ class Ambulcards extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title = "Амбулаторні записи";
+    protected $title = "Анамнестичні записи";
 
     /**
      * @var string
@@ -48,7 +48,7 @@ class Ambulcards extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-address-card');
+        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-vr-cardboard');
     }
 
     /**
@@ -58,23 +58,22 @@ class Ambulcards extends Section implements Initializable
      */
     public function onDisplay($payload = [])
     {
-
         $display = AdminDisplay::datatablesAsync()->setDatatableAttributes(['bInfo' => false])->setDisplaySearch(true)->paginate(10);
 
         $display->setHtmlAttribute('class', 'table-info table-hover');
-        $display->with('relshipAmbulcardsUsers', 'relshipUsersAmbulcards');
+        $display->with('relshipAnamnestcardsUsers', 'relshipUsersAnamnestcards');
 
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')
-            ->setHtmlAttribute('class', 'text-center')
-            ->setSearchable(false),
-            AdminColumn::link('relshipAmbulcardsUsers.name', 'Name')
+                ->setHtmlAttribute('class', 'text-center')
+                ->setSearchable(false),
+            AdminColumn::link('relshipAnamnestcardsUsers.name', 'Name')
                 ->setSearchCallback(function ($column, $query, $search){
-                $query->orwhere('users.name', 'like', "%$search%")->
-                        orwhere('users.group', 'like', "%$search%");
-            }),
-            AdminColumnEditable::text('diagnosis', 'Діагноз'),
-            AdminColumn::text('relshipAmbulcardsUsers.group', 'Група')->setSearchable(false),
+                    $query->orwhere('users.name', 'like', "%$search%")->
+                    orwhere('users.group', 'like', "%$search%");
+                }),
+            AdminColumnEditable::text('description_anamnests', 'Опис'),
+            AdminColumn::text('relshipAnamnestcardsUsers.group', 'Група')->setSearchable(false),
             AdminColumn::image('image', 'Зображення'),
             AdminColumn::text('created_at', 'Created / updated', 'updated_at')
                 ->setWidth('160px')
@@ -103,20 +102,17 @@ class Ambulcards extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
-
         $users = User::where('role',1)->orderBy('name')->pluck('name','id')->toArray();
 
 //        dd($users);
 
         $display = AdminDisplay::datatablesAsync()->setDatatableAttributes(['bInfo' => false]);
-        $display->with('relshipAmbulcardsUsers', 'relshipUsersAmbulcards');
+        $display->with('relshipAnamnestcardsUsers', 'relshipUsersAnamnestcards');
 
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
                 AdminFormElement::select('user_id', 'ПІБ студента', $users)
-                ->setDisplay('ПІБ')->required(),
-                AdminFormElement::text('diagnosis', 'Діагноз')
-                    ->required(),
+                    ->setDisplay('ПІБ')->required(),
 
                 AdminFormElement::html('<hr>'),
                 AdminFormElement::datetime('created_at')
@@ -125,8 +121,7 @@ class Ambulcards extends Section implements Initializable
                 ,
                 AdminFormElement::html('last AdminFormElement without comma')
             ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')->addColumn([
-                AdminFormElement::textarea('description_ambulcards', 'Опис')->setRows(3),
-                AdminFormElement::image('image','Зображення')
+                AdminFormElement::textarea('description_anamnests', 'Опис')->setRows(3),
             ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
         ]);
 

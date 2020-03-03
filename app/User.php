@@ -46,4 +46,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Ambulcard', 'user_id', 'id');
     }
 
+    public function relshipUsersAnamnestcard()
+    {
+        return $this->hasMany('App\Anamnest', 'user_id', 'id');
+    }
 }
