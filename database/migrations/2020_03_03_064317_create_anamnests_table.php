@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAmbulcardsTable extends Migration
+class CreateAnamnestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateAmbulcardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ambulcards', function (Blueprint $table) {
+        Schema::create('anamnests', function (Blueprint $table) {
             $table->Increments('id');
             $table->BigInteger('user_id')->unsigned();
-            $table->string('diagnosis');
-            $table->text('desc_ambulcard')->nullable();
-            $table->string('image')->nullable();
+            $table->text('description');
             $table->timestamps();
 
 //            $table->unique('id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
-        Artisan::call('db:seed', array('--class' => 'AddDataToTableAmbulcards'));
+        Artisan::call('db:seed', array('--class' => 'addDataToTableAnamnests'));
     }
 
     /**
@@ -35,6 +33,6 @@ class CreateAmbulcardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ambulcards');
+        Schema::dropIfExists('anamnests');
     }
 }

@@ -3,12 +3,14 @@
 namespace App\Providers;
 
 use App\Ambulcard;
+use App\Anamnest;
 use App\Article;
 use App\Menulist;
 use App\Question;
 use App\Menus;
 use App\Slider;
 use App\Student;
+use App\Studentanamnest;
 use App\Test;
 use App\User;
 use App\Worker;
@@ -29,8 +31,9 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Article::class => 'App\Http\Sections\Articles',
         Test::class => 'App\Http\Sections\Tests',
         Question::class => 'App\Http\Sections\Questions',
-        Ambulcard::class => 'App\Http\Sections\Ambulcards',
-        Student::class => 'App\Http\Sections\Ambulcardsusers',
+//        Ambulcard::class => 'App\Http\Sections\Ambulcards',
+        Student::class => 'App\Http\Sections\Students',
+//        Anamnest::class => 'App\Http\Sections\Anamnestcards',
     ];
 
     /**
