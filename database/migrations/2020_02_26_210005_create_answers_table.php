@@ -16,12 +16,12 @@ class CreateAnswersTable extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->Increments('id');
             $table->Integer('question_id')->unsigned();
-            $table->string('text');
-            $table->integer('bal')->default(1);
-            $table->boolean('active')->default(1);
+            $table->string('text_a');
+            $table->integer('bal_a')->default(1);
+            $table->boolean('active_a')->default(1);
 //            $table->integer('type')->default(0);
-            $table->string('image')->nullable();
-            $table->integer('order')->default(0);
+            $table->string('image_a')->nullable();
+            $table->integer('order_a')->default(0);
             $table->timestamps();
 
 //            $table->unique('id');

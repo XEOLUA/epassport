@@ -10,4 +10,9 @@ class Answer extends Model
     protected $table = 'answers';
     protected $guarded=['id'];
 
+    public function getOrderField()
+    {
+        return 'order_a';
+    }
+
 }

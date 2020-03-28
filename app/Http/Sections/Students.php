@@ -72,7 +72,7 @@ class Students extends Section implements Initializable
             ,
             AdminColumn::lists('relStudentAnamnest.description', 'Анамнестичні записи'),
 
-            AdminColumn::boolean('status', 'Активований'),
+            AdminColumnEditable::checkbox('status', 'Активований'),
         ];
 
         $display = AdminDisplay::datatables()
