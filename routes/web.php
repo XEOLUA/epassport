@@ -22,7 +22,12 @@ Route::get('/students/abetka/{alpha}', 'StudentsController@abetka')->name('abetk
 Route::get('/students/years/{year}', 'StudentsController@years')->name('years');
 Route::get('/students/groups/{group}', 'StudentsController@groups')->name('groups');
 Route::get('/cabinet/amb/{student_id}', 'StudentsController@ambulat')->name('ambulat');
+Route::get('/cabinet/anamn/{student_id}', 'StudentsController@anamn')->name('anamn');
+Route::get('/cabinet/listads/{student_id}', 'StudentsController@listads')->name('listads');
 Route::get('/cabinet/{id}', 'StudentsController@cabinet')->name('cabinet');
+Route::get('/test/results/{test_id}/{user_id}', 'TestController@show')->name('testshow');
+Route::get('/test/run/{test_id}', 'TestController@run')->name('testrun');
+Route::post('/test/save/{test_id}', 'TestController@save')->name('testsave');
 Route::post('/profile', 'ProfileController@edit')->name('editprofile');
 
 Auth::routes();

@@ -16,13 +16,14 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->Increments('id');
             $table->Integer('test_id')->unsigned();
-            $table->string('text');
-            $table->string('description')->nullable();
-            $table->integer('bal')->default(0);
-            $table->integer('type')->default(0);
-            $table->boolean('active')->default(1);
-            $table->integer('order')->default(1);
-            $table->string('image')->nullable();
+            $table->string('text_q');
+            $table->string('description_q')->nullable();
+            $table->string('params_q')->nullable();
+            $table->integer('bal_q')->default(0);
+            $table->integer('type_q')->default(0);
+            $table->boolean('active_q')->default(1);
+            $table->integer('order_q')->default(1);
+            $table->string('image_q')->nullable();
             $table->timestamps();
 
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');

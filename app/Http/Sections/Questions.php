@@ -67,17 +67,17 @@ class Questions extends Section implements Initializable
 
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumnEditable::text('text', 'Питання'),
-            AdminColumnEditable::select('type')->setLabel('Тип питання')->setWidth('250px')
+            AdminColumnEditable::text('text_q', 'Питання'),
+            AdminColumnEditable::select('type_q')->setLabel('Тип питання')->setWidth('250px')
                 ->setOptions(['Один', 'Багато', 'Відкрите'])
                 ->setDisplay('Тип')
                 ->setTitle('Оберіть тип:'),
 //            AdminColumnEditable::text('description', 'Опис'),
-            AdminColumnEditable::checkbox('active', 'Відкрито')->setWidth('120px'),
+            AdminColumnEditable::checkbox('active_q', 'Відкрито')->setWidth('120px'),
             AdminColumn::relatedLink('relshipQuestionsTests.title','Тест'),
             AdminColumn::count('relshipQuestionsAnswers', 'Відповідей'),
-            AdminColumn::order('order')->setLabel('Порядок')->setWidth('90px'),
-            AdminColumn::image('image', 'Світлина')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
+            AdminColumn::order('order_q')->setLabel('Порядок')->setWidth('90px'),
+            AdminColumn::image('image_q', 'Світлина')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumn::datetime('created_at')->setLabel('Дата')->setWidth('90px'),
         ];
 
@@ -119,36 +119,37 @@ class Questions extends Section implements Initializable
             AdminFormElement::columns()
                 ->addColumn(function () {
                     return [
-                        $question = AdminFormElement::text('text', 'Питання')
+                        $question = AdminFormElement::text('text_q', 'Питання')
                             ->setHtmlAttribute('placeholder', 'Назва питання')
                             ->setHtmlAttribute('maxlength', '255')
                             ->setHtmlAttribute('minlength', '1')
                             ->setValidationRules([
                                 'required', 'string', 'between:1,255',
                             ]),
-                        AdminFormElement::textarea('description','Опис')->setRows(2),
-                        AdminFormElement::number('bal','Бал'),
-                        $active = AdminFormElement::checkbox('active','Активный')
+                        AdminFormElement::textarea('description_q','Опис')->setRows(2),
+                        AdminFormElement::textarea('params_q','Параметри')->setRows(3),
+                        AdminFormElement::number('bal_q','Бал'),
+                        $active = AdminFormElement::checkbox('active_q','Активный')
                             ->setValidationRules(['boolean']),
-                        AdminFormElement::number('order','Порядок'),
-                        AdminFormElement::image('image','Зображення'),
+                        AdminFormElement::number('order_q','Порядок'),
+                        AdminFormElement::image('image_q','Зображення'),
                     ];
                 },'col-xs-3 col-sm-6 col-md-8 col-lg-3')->addColumn(function () {
                     return [
                         AdminFormElement::hasMany('relshipQuestionsAnswers', [
-                            AdminFormElement::text('text','Відповідь')
+                            AdminFormElement::text('text_a','Відповідь')
                                 ->setHtmlAttribute('placeholder','Відповідь')
                                 ->setHtmlAttribute('maxlength', '255')
                                 ->setHtmlAttribute('minlength', '1')
                                 ->setValidationRules([
                                     'required', 'string', 'between:1,255',
                                 ]),
-                            AdminFormElement::number('bal','Бал')->required()
+                            AdminFormElement::number('bal_a','Бал')->required()
                                 ->setHtmlAttribute('placeholder',1)->setDefaultValue(1),
-                            AdminFormElement::checkbox('active')->setLabel('Видимість')
+                            AdminFormElement::checkbox('active_a')->setLabel('Видимість')
 //                                ->setHtmlAttribute('checked','true')
                             ,
-                        AdminFormElement::image('image','Зображення'),
+                        AdminFormElement::image('image_a','Зображення'),
                         ]),
                     ];
                 },'col-xs-12 col-sm-6 col-md-8 col-lg-9')

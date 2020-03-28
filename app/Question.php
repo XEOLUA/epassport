@@ -16,4 +16,9 @@ class Question extends Model
     {
         return $this->belongsTo('App\Test', 'test_id', 'id');
     }
+
+    public function getOrderField()
+    {
+        return 'order_q';
+    }
 }
