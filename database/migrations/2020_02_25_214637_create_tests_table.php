@@ -21,6 +21,7 @@ class CreateTestsTable extends Migration
             $table->boolean('active')->default(1);
             $table->integer('order')->default(1);
             $table->string('image')->nullable();
+            $table->integer('type')->default(0);
             $table->timestamps();
         });
 

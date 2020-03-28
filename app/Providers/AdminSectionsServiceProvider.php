@@ -8,6 +8,7 @@ use App\Article;
 use App\Menulist;
 use App\Question;
 use App\Menus;
+use App\Result;
 use App\Slider;
 use App\Student;
 use App\Studentanamnest;
@@ -33,7 +34,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         Question::class => 'App\Http\Sections\Questions',
 //        Ambulcard::class => 'App\Http\Sections\Ambulcards',
         Student::class => 'App\Http\Sections\Students',
-//        Anamnest::class => 'App\Http\Sections\Anamnestcards',
+        Result::class => 'App\Http\Sections\Results',
     ];
 
     /**

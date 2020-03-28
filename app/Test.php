@@ -14,4 +14,8 @@ class Test extends Model
         return $this->hasMany('App\Question', 'test_id', 'id');
     }
 
+    public function relshipTestsResults()
+    {
+        return $this->hasMany('App\Result', 'test_id', 'id');
+    }
 }

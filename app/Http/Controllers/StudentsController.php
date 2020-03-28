@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Ambulcard;
+use App\Anamnest;
 use App\Menulist;
+use App\Test;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -33,7 +35,11 @@ class StudentsController extends Controller
                     'years'=>$years,
                     'groups'=>$groups,
                 ]);
-        } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
     }
 
     public function abetka($alpha){
@@ -46,7 +52,11 @@ class StudentsController extends Controller
                 [
                     'students'=>$students,
                 ]);
-        } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
     }
 
     public function groups($group){
@@ -59,7 +69,11 @@ class StudentsController extends Controller
                 [
                     'students'=>$students,
                 ]);
-        } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
     }
 
     public function years($year){
@@ -72,7 +86,11 @@ class StudentsController extends Controller
                 [
                     'students'=>$students,
                 ]);
-        } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
     }
 
     public function cabinet($id){
@@ -88,7 +106,11 @@ class StudentsController extends Controller
                     'student'=>$student,
                     'passportMenu'=>$passportMenu,
                 ]);
-        } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
     }
 
     public function ambulat($student_id){
@@ -103,6 +125,50 @@ class StudentsController extends Controller
                     'student'=>$student,
                     'ambulatRecords' => $ambulatRecords,
                 ]);
-        } else return "Access denied! <p><a href='/'>Return to main page</a></p>";
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
     }
+
+    public function anamn($student_id){
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $student_id==auth()->user()->id))
+        {
+
+            $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
+            $ambulatRecords = Anamnest::where('user_id',$student_id)->orderBy('updated_at')->orderBy('created_at')->get();
+//            dd($students);
+            return view('anamn',
+                [
+                    'student'=>$student,
+                    'anamnRecords' => $ambulatRecords,
+                ]);
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
+    }
+
+    public function listads($student_id){
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $student_id==auth()->user()->id))
+        {
+            $tests_id = [1,4,5];
+            $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
+            $tests = Test::whereIn('id',$tests_id)->get();
+//            dd($tests);
+            return view('listads',
+                [
+                    'tests'=>$tests,
+                    'student' => $student,
+                ]);
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
+
+    }
+
 }

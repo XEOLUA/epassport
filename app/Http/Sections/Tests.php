@@ -35,7 +35,7 @@ class Tests extends Section implements Initializable
     /**
      * @var string
      */
-    protected $title = "Тести";
+    protected $title = "Опитування";
 
     /**
      * @var string
@@ -61,6 +61,10 @@ class Tests extends Section implements Initializable
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumn::image('image', 'Світлина')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumnEditable::text('title', 'Назва тесту'),
+            AdminColumnEditable::select('type')->setLabel('Тип')->setWidth('100px')
+                ->setOptions(['тест','анкета'])
+                ->setDisplay('Тип')
+                ->setTitle('Оберіть тип:'),
             AdminColumnEditable::text('description', 'Опис'),
             AdminColumnEditable::checkbox('active', 'Відкрито')->setWidth('120px'),
             AdminColumn::count('relshipTestsQuestions', 'Питань'),
@@ -110,20 +114,20 @@ class Tests extends Section implements Initializable
                 },'col-xs-3 col-sm-6 col-md-8 col-lg-3')->addColumn(function () {
                     return [
                         AdminFormElement::hasMany('relshipTestsQuestions', [
-                        AdminFormElement::text('text','Питання')
+                        AdminFormElement::text('text_q','Питання')
                                 ->setHtmlAttribute('placeholder','Питання')
                                 ->setHtmlAttribute('maxlength', '255')
                                 ->setHtmlAttribute('minlength', '1')
                                 ->setValidationRules([
                                     'required', 'string', 'between:1,255',
                                 ]),
-                            AdminFormElement::number('bal','Бал')->required()->setDefaultValue(1),
-                            AdminFormElement::select('type')->setLabel('Тип питання')
+                            AdminFormElement::number('bal_q','Бал')->required()->setDefaultValue(1),
+                            AdminFormElement::select('type_q')->setLabel('Тип питання')
                                 ->setOptions(['Один', 'Багато', 'Відкрите'])
                                 ->setDisplay('Тип')
 //                                ->setTitle('Оберіть тип:')
                             ,
-                        AdminFormElement::checkbox('active','Видимість'),
+                        AdminFormElement::checkbox('active_q','Видимість'),
 //                        AdminFormElement::image('image','Зображення'),
                         ]),
                     ];
