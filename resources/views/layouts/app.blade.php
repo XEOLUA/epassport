@@ -17,7 +17,7 @@
 
     <!-- Bootstrap core CSS -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -48,6 +48,7 @@
     <!-- Custom styles for this template -->
     <link href="{{asset("css/carousel.css")}}" rel="stylesheet">
 </head>
+
 <body>
 
     <main role="main">

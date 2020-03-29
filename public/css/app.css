@@ -1,5 +1,94 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+.hide {
+  display: none !important;
+}
+
+.header .my_navbar {
+  background-color: #2980b9 !important;
+  max-height: 60px;
+  padding: 10px 80px;
+}
+
+.header .my_navbar .svg_exit {
+  fill: white;
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+}
+
+.header .my_navbar .nav-item_big {
+  font-size: 18px;
+}
+
+.header .my_navbar .block_center .nav-link {
+  font-size: 18px;
+  padding: 0 30px;
+}
+
+.header .my_navbar .mobi_bar {
+  display: flex;
+}
+
+.header .my_navbar .mobi_bar .logo {
+  width: 50px;
+}
+
+.header .my_navbar .my_navbar-nav {
+  margin: 0 !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2980b9 !important;
+}
+
+.header .my_navbar .block_registr .my_navbar-nav {
+  display: flex;
+}
+
+.header .my_navbar .block_registr .btn_registr {
+  background: white;
+  padding: 5px 20px;
+  border-radius: 3px;
+  border: 0;
+  margin-left: 15px;
+  color: #0567cc !important;
+}
+
+img {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .header .my_navbar {
+    padding: 10px 10px;
+  }
+
+  .header .my_navbar .nav-item {
+    width: 100px;
+    margin-right: 10px;
+  }
+
+  .header .my_navbar .nav_hide {
+    margin: -1px !important;
+  }
+
+  .header .my_navbar .nav_hide .user_block {
+    display: flex;
+    align-items: center;
+  }
+
+  .header .my_navbar .nav_hide .user_block a {
+    margin-right: 10px;
+  }
+
+  .header .my_navbar .mobi_bar {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

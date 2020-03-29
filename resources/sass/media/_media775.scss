@@ -1,0 +1,32 @@
+
+@media (max-width: 768px) {
+    .header{
+
+        .my_navbar{
+            padding: 10px 10px;
+            .nav-item{
+                width: 100px;
+                margin-right: 10px;
+            }
+
+            .nav_hide{
+                margin: -1px!important;
+                .user_block{
+                    display: flex;
+                    align-items: center;
+                    a{
+                        margin-right: 10px;
+                    }
+                }
+            }
+
+
+            .mobi_bar{
+                display: flex;
+                justify-content: space-between
+            }
+        }
+
+    }
+}
+
