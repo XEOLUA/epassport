@@ -23,7 +23,7 @@
 
 .header .my_navbar .block_center .nav-link {
   font-size: 18px;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 .header .my_navbar .mobi_bar {
@@ -67,7 +67,12 @@ img {
 
   .header .my_navbar .nav-item {
     width: 100px;
-    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+
+  .header .my_navbar .nav-item .nav-link {
+    font-size: 18px;
+    padding: 0;
   }
 
   .header .my_navbar .nav_hide {
