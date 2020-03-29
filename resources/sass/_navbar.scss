@@ -1,0 +1,55 @@
+.hide{
+    display:none!important;
+}
+.header{
+    .my_navbar{
+        background-color:#2980b9!important;
+        max-height: 60px;
+        padding: 10px 80px;
+        .svg_exit{
+            fill: white;
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+        }
+        .nav-item_big{
+            font-size: 18px;
+        }
+        .block_center{
+            .nav-link{
+                font-size: 18px;
+                padding: 0 20px;
+            }
+        }
+        .mobi_bar{
+            display: flex;
+            .logo{
+                width: 50px;
+            }
+        }
+            .my_navbar-nav{
+                 margin: 0!important;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color:#2980b9!important;
+                }
+        .block_registr{
+            .my_navbar-nav{
+                display: flex;
+
+            }
+            .btn_registr{
+                background: white;
+                padding: 5px 20px;
+                border-radius: 3px;
+                border: 0;
+                margin-left: 15px;
+                color: #0567cc !important;
+            }
+        }
+    }
+
+}
+
