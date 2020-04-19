@@ -23,8 +23,8 @@ body {
 }
 
 /* Declare heights because of positioning of img element */
-.carousel-item {
-    height: 32rem;
+.carousel-item{
+    height: calc(100vh - 65px)!important;
 }
 .carousel-item > img {
     position: absolute;

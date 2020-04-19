@@ -1,3 +1,42 @@
 img{
     width: 100%;
 }
+.main_text{
+    font-size: 30px;
+}
+.subtitle{
+    font-size:32px;
+    line-height: 1;
+    letter-spacing: -.05rem;
+    font-weight: 400;
+}
+.title{
+    font-size:36px;
+    margin:75px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+}
+.return-to-top{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    display: block;
+    text-decoration: none;
+    border-radius: 35px;
+    display: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 10px rgba(0, 2, 76, 0.13);
+    svg{
+        width: 20px;
+        height: 20px;
+        fill: #0567cc;
+    }
+}
