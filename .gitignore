@@ -13,6 +13,7 @@ yarn-error.log
 .idea
 
 composer.phar
+public
 public/js
 public/css
 public/packages/sleepingowl
