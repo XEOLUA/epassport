@@ -27,7 +27,10 @@
         </table>
 {{--        <a  href="#">Coming soon</a>--}}
     </div>
-    <div class="product-device shadow-sm d-none d-md-block">
-        <a href="https://zakon.rada.gov.ua/laws/show/2297-17" target="_blank">Закон України "Про захист персональних даних"</a></div>
-    <div class="product-device product-device-2 shadow-sm d-none d-md-block" style="color: red">Авторизований користувач з правами перегляду персональних даних студентів несе відповідальність про їх нерозголошення!</div>
+
 </div>
+<section class="students">
+    <div class="container">
+        @include('home.lawUkraine')
+    </div>
+</section>
