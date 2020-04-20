@@ -1,0 +1,28 @@
+@media (max-width: 576px) {
+    //global
+    .subtitle{
+        font-size:7.208vw;
+    }
+    .title{
+        font-size:7.250vw;
+        margin:10.021vw 0;
+    }
+    .text{
+        font-size:3.125vw;
+    }
+    //articles
+    .articles{
+        .lead{
+            font-size: 4vw;
+        }
+        .right_block, .left_block{
+            justify-content: center;
+        }
+    }
+    //students
+    .students{
+        .law_Ukraine{
+            margin: 6.944vw 0;
+        }
+    }
+}

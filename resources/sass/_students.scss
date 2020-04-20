@@ -1,0 +1,19 @@
+.students{
+    padding: 20px;
+    position: relative;
+    .title{
+        margin-bottom: 20px;
+        text-transform: none;
+    }
+    .students_row{
+        .block_list{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .btn-outline-secondary{
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+}

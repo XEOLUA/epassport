@@ -1,0 +1,32 @@
+.articles{
+    .left_block{
+        display: flex;
+        justify-content: flex-start;
+        .featurette-heading{
+            margin-top: 0;
+        }
+        .img_article{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+    }
+    .right_block{
+        display: flex;
+        justify-content: flex-end;
+        .featurette-heading{
+            margin-top: 0;
+        }
+        .img_article{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+    }
+    .block_text{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+}

@@ -56,11 +56,190 @@
   color: #0567cc !important;
 }
 
+.header .nav_hide {
+  display: none;
+}
+
+.law_Ukraine {
+  margin: 40px 0;
+}
+
+.law_Ukraine .block_law {
+  display: flex;
+  align-items: center;
+}
+
+.law_Ukraine .block_law .file-medical {
+  width: 15px;
+  margin-right: 15px;
+}
+
+.law_Ukraine .block_law .text {
+  font-weight: bold;
+}
+
+.law_Ukraine .block_text {
+  font-weight: 300;
+  color: red;
+  margin-top: 5px;
+}
+
+.workers .main_text {
+  padding: 20px 0 70px 0;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.workers .row_workers .photo_workers {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.articles .left_block {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.articles .left_block .featurette-heading {
+  margin-top: 0;
+}
+
+.articles .left_block .img_article {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.articles .right_block {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.articles .right_block .featurette-heading {
+  margin-top: 0;
+}
+
+.articles .right_block .img_article {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.articles .block_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.students {
+  padding: 20px;
+  position: relative;
+}
+
+.students .title {
+  margin-bottom: 20px;
+  text-transform: none;
+}
+
+.students .students_row .block_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.students .students_row .block_list .btn-outline-secondary {
+  margin-bottom: 15px;
+}
+
 img {
   width: 100%;
 }
 
-@media (max-width: 768px) {
+.subtitle {
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.05rem;
+  font-weight: 400;
+}
+
+.title {
+  font-size: 36px;
+  margin: 75px 0;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.text {
+  font-size: 18px;
+}
+
+.return-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  display: block;
+  text-decoration: none;
+  border-radius: 35px;
+  display: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 0 10px rgba(0, 2, 76, 0.13);
+}
+
+.return-to-top svg {
+  width: 20px;
+  height: 20px;
+  fill: #0567cc;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .subtitle {
+    font-size: 3.229vw;
+  }
+
+  .title {
+    font-size: 3.633vw;
+    margin: 7.568vw 0;
+  }
+
+  .text {
+    font-size: 1.816vw;
+  }
+
+  .students .law_Ukraine {
+    margin: 4.036vw 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .subtitle {
+    font-size: 4.129vw;
+  }
+
+  .title {
+    font-size: 4.845vw;
+    margin: 9.568vw 0;
+  }
+
+  .text {
+    font-size: 2.323vw;
+  }
+
   .header .my_navbar {
     padding: 10px 10px;
   }
@@ -91,6 +270,34 @@ img {
   .header .my_navbar .mobi_bar {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 576px) {
+  .subtitle {
+    font-size: 7.208vw;
+  }
+
+  .title {
+    font-size: 7.25vw;
+    margin: 10.021vw 0;
+  }
+
+  .text {
+    font-size: 3.125vw;
+  }
+
+  .articles .lead {
+    font-size: 4vw;
+  }
+
+  .articles .right_block,
+  .articles .left_block {
+    justify-content: center;
+  }
+
+  .students .law_Ukraine {
+    margin: 6.944vw 0;
   }
 }
 
