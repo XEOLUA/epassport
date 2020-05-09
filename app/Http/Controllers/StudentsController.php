@@ -158,8 +158,6 @@ class StudentsController extends Controller
 //            $tests_id = [1,2,4,5];
             $tests_id=TestInMenu::where('menuitem_id',5)->get()->pluck('test_id','test_id')->toArray();
 //            dd($tests_id);
-
-
             $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
             $tests = Test::whereIn('id',$tests_id)->get();
 //            dd($tests);
