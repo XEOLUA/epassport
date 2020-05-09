@@ -21,26 +21,43 @@
             </thead>
             <tbody>
 {{--            {{dd(unserialize($results[0]->answers))[1]}}--}}
-            @if(count($results)>0)
+
             @foreach($questions as $key => $item)
             <tr>
                 <td>{{$loop->index+1}}</td>
                 <td>{{$questions[$key]->text_q}}</td>
+                @if(count($results)>0)
                     @foreach($results as $k => $res)
                     <td>
                     @if(isset(array_values(unserialize($res->answers))[$key+1]))
                          @foreach(array_values(unserialize($res->answers))[$key+1] as $var => $ans)
 {{--                             <pre>{{print_r($ans ?? '-')}}</pre>--}}
                                 @foreach($ans as $a => $v)
-                                    {{$v!='hidden' ? $v : ''}}
+                                    @if($v!='hidden')
+                                        @if(ceil(0.5*$a)==0) {{$v}} @else
+                                        {{chr(ceil(0.5*$a)+64)}}({{$v}}),
+                                         @endif
+                                        @endif
                                 @endforeach
                          @endforeach
                     @endif
                      </td>
                     @endforeach
+                @endif
             </tr>
             @endforeach
-            @endif
+                @if(count($proc)>0)
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                @foreach($proc as $p)
+                    <td>
+                        {!! $p !!}
+                    </td>
+                @endforeach
+                </tr>
+                @endif
+
+
             </tbody>
         </table>
     </div>

@@ -6,6 +6,7 @@ use App\Ambulcard;
 use App\Anamnest;
 use App\Menulist;
 use App\Test;
+use App\TestInMenu;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -154,7 +155,9 @@ class StudentsController extends Controller
     public function listads($student_id){
         if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $student_id==auth()->user()->id))
         {
-            $tests_id = [1,4,5];
+//            $tests_id = [1,2,4,5];
+            $tests_id=TestInMenu::where('menuitem_id',5)->get()->pluck('test_id','test_id')->toArray();
+//            dd($tests_id);
             $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
             $tests = Test::whereIn('id',$tests_id)->get();
 //            dd($tests);

@@ -24,8 +24,16 @@ class TestController extends Controller
             $res = Result::where(['test_id'=>$test_id,'user_id'=>$user_id])->get();
             $student = Student::where('id',$user_id)->get();
             $test = Test::where('id',$test_id)->get();
-            count($res) && $test[0]->settings ? ResultProcessing::processing(unserialize($res[0]->answers),
-                $test[0]->settings) : 0;
+
+//            dd($res,$test);
+$proc=[];
+
+            if(count($res) && $test[0]->settings)
+                foreach ($res as $key =>$r){
+                    $proc[$key] = ResultProcessing::processing(unserialize($r->answers),$test[0]->settings);
+                };
+
+//                dd($proc);
             $questions = Question::where('test_id',$test_id)->get();
             return view('results',
                 [
@@ -33,6 +41,7 @@ class TestController extends Controller
                     'student'=>$student,
                     'test'=>$test,
                     'questions'=>$questions,
+                    'proc'=>$proc
                 ]);
         }
         else return redirect()->route('login');

@@ -1,7 +1,7 @@
 <!-- Three columns of text below the carousel -->
 <section class="workers">
     <a name="workers"></a>
-        <h2 align="center" class="title">Над проєктом працюють11</h2>
+        <h2 align="center" class="title">Над проєктом працюють</h2>
     <div class="row row_workers">
         @foreach($workers as $item)
         <div class="col-lg-4">

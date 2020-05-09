@@ -18,4 +18,9 @@ class Test extends Model
     {
         return $this->hasMany('App\Result', 'test_id', 'id');
     }
+
+    public function relTestToMenuList()
+    {
+        return $this->belongsToMany('App\Menulist','testinmenus');
+    }
 }
