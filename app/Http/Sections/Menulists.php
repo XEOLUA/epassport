@@ -10,6 +10,7 @@ use AdminFormElement;
 use AdminColumnFilter;
 use App\Menulist;
 use App\Menus;
+use App\Test;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -76,6 +77,7 @@ class Menulists extends Section implements Initializable
                 ->setDisplay('Меню')
                 ->setTitle('Выберите категорию:'),
 //            AdminColumn::text('order'),
+            AdminColumn::count('relMenuListToTestInMenu', 'Тестів')->setWidth('80px'),
             AdminColumn::order('order')->setLabel('Порядок')->setWidth('90px'),
             AdminColumnEditable::checkbox('active','Опубліковано')->setWidth('150px'),
             AdminColumn::image('image','Зображення'),
@@ -107,7 +109,10 @@ class Menulists extends Section implements Initializable
         $menuList = Menulist::pluck('title','id')->toArray();
         $menuList[0] = 'root';
 
-        $form = AdminForm::card()->addBody([
+        $tests=Test::select('id','title')->get()->pluck('title','id')->toArray();
+
+        $form = AdminForm::panel();
+        $form->setItems(
                 AdminFormElement::columns()->addColumn([
                 AdminFormElement::text('title', 'Заголовок')->required(),
                 AdminFormElement::text('link', 'URL'),
@@ -132,8 +137,17 @@ class Menulists extends Section implements Initializable
                 AdminFormElement::text('settings','Налаштування'),
                 AdminFormElement::number('order','порядок'),
 
-            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8'),
-        ]);
+            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-8')->addColumn(function () use($tests) {
+                    return [
+                        AdminFormElement::hasMany('relMenuListToTestInMenu', [
+                            AdminFormElement::select('test_id')->setLabel('Тест')
+                                ->setOptions($tests)
+                                ->setDisplay('Тип'),
+//                        AdminFormElement::image('image','Зображення'),
+                        ]),
+                    ];
+                },'col-xs-3 col-sm-6 col-md-8 col-lg-3')
+        );
 
         $form->getButtons()->setButtons([
             'save' => new Save(),

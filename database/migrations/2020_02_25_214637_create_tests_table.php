@@ -17,7 +17,7 @@ class CreateTestsTable extends Migration
             $table->Increments('id');
             $table->string('title');
             $table->string('description')->nullable();
-            $table->string('settings')->nullable();
+            $table->string('settings',2000)->nullable();
             $table->boolean('active')->default(1);
             $table->integer('order')->default(1);
             $table->string('image')->nullable();
