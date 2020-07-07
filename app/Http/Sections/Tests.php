@@ -105,7 +105,7 @@ class Tests extends Section implements Initializable
                                 'required', 'string', 'between:1,255',
                             ]),
                         AdminFormElement::textarea('description','Опис')->setRows(2),
-                        AdminFormElement::text('settings','Налаштування'),
+                        AdminFormElement::textarea('settings','Налаштування'),
                         $active = AdminFormElement::checkbox('active','Активный')
                             ->setValidationRules(['boolean']),
                         AdminFormElement::number('order','Порядок'),

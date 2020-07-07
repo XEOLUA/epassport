@@ -229,7 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'ImgResize' => App\Services\ResultProcessing::class,
+        'processing' => App\Services\ResultProcessing::class,
         'd' => App\Services\d::class,
     ],
 
