@@ -75,16 +75,16 @@ class ResultProcessing
 
                       if($t>=$dist[0] && $t<=$dist[1]){
                           //якщо результат потрапив в проміжок
-                          $result.=$ans[1]."(".$dist[0].";".$dist[1].")=".$t."<br>";
+                          $result.=$ans[1]."(".$dist[0].";".$dist[1].")=".$t."\n";
                           $flag=0;
                          // break;
                       }
                   }
               //Якщо результат не потрапив в жодин з проміжків буде виведенно ф-я та результат лбчислення
-              if($flag) $result.=$item[2]."(".$item[1].")=".$t."<br>";
+              if($flag) $result.=$item[2]."(".$item[1].")=".$t."\n";
               }
               else //якщо не було таблиці підстановки
-               $result.=$item[2]."(".$item[1].")=".$t."<br>";
+               $result.=$item[2]."(".$item[1].")=".$t."\n";
           }
 
           return $result;
