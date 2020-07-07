@@ -6,8 +6,8 @@
     </ol>
     <div class="carousel-inner">
         @foreach($slider as $item)
-        <div class="carousel-item @if ($loop->first) active @endif"  style="background-image: url('{{url($item->image ?? 'images/slide.jpg')}}');
-            background-size: 100%; ">
+        <div class="carousel-item @if ($loop->first) active @endif" >
+            <img src="{{url($item->image ?? 'images/slide.jpg')}}">
 {{--            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>--}}
             <div class="container">
                 <div class="carousel-caption text-left">
