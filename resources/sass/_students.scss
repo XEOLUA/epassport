@@ -15,5 +15,13 @@
             }
         }
     }
+    .wrapper_abetka{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .link_abetka{
+            margin: 0 5px;
+        }
+    }
 
 }
