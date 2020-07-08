@@ -201,6 +201,16 @@
   margin-bottom: 15px;
 }
 
+.students .wrapper_abetka {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.students .wrapper_abetka .link_abetka {
+  margin: 0 5px;
+}
+
 img {
   width: 100%;
 }
