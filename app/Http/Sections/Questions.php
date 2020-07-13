@@ -145,10 +145,10 @@ class Questions extends Section implements Initializable
                         AdminFormElement::hasMany('relshipQuestionsAnswers', [
                             AdminFormElement::text('text_a','Відповідь')
                                 ->setHtmlAttribute('placeholder','Відповідь')
-                                ->setHtmlAttribute('maxlength', '255')
+                                ->setHtmlAttribute('maxlength', '1000')
                                 ->setHtmlAttribute('minlength', '1')
                                 ->setValidationRules([
-                                    'required', 'string', 'between:1,255',
+                                    'required', 'string', 'between:1,1000',
                                 ]),
                             AdminFormElement::number('bal_a','Бал')
                                 ->setDefaultValue(1)
