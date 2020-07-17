@@ -24,7 +24,10 @@ Route::get('/students/groups/{group}', 'StudentsController@groups')->name('group
 Route::get('/cabinet/amb/{student_id}', 'StudentsController@ambulat')->name('ambulat');
 Route::get('/cabinet/anamn/{student_id}', 'StudentsController@anamn')->name('anamn');
 Route::get('/cabinet/listads/{student_id}', 'StudentsController@listads')->name('listads');
+Route::get('/cabinet/listpsihtest/{student_id}', 'StudentsController@listpsihtest')->name('listpsihtest');
+Route::get('/cabinet/listanketa/{student_id}', 'StudentsController@listanketa')->name('listpanketa');
 Route::get('/cabinet/{id}', 'StudentsController@cabinet')->name('cabinet');
+Route::get('/cabinet/resultsspets/{student_id}', 'StudentsController@resultsspets')->name('resultsspets');
 Route::get('/test/results/{test_id}/{user_id}', 'TestController@show')->name('testshow');
 Route::get('/test/run/{test_id}', 'TestController@run')->name('testrun');
 Route::post('/test/save/{test_id}', 'TestController@save')->name('testsave');

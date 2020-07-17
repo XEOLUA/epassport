@@ -66,19 +66,22 @@ class Questions extends Section implements Initializable
         $display->with('relshipTestsQuestions', 'relshipQuestionsTests');
 
         $columns = [
-            AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
+            AdminColumn::text('id', '#')->setWidth('50px')
+                ->setHtmlAttribute('class', 'text-center'),
             AdminColumnEditable::text('text_q', 'Питання'),
-            AdminColumnEditable::select('type_q')->setLabel('Тип питання')->setWidth('250px')
+            AdminColumnEditable::select('type_q')->setLabel('Тип')->setWidth('100px')
                 ->setOptions(['Один', 'Багато', 'Відкрите'])
                 ->setDisplay('Тип')
                 ->setTitle('Оберіть тип:'),
 //            AdminColumnEditable::text('description', 'Опис'),
             AdminColumnEditable::checkbox('active_q', 'Відкрито')->setWidth('120px'),
             AdminColumn::relatedLink('relshipQuestionsTests.title','Тест'),
-            AdminColumn::count('relshipQuestionsAnswers', 'Відповідей'),
+            AdminColumn::count('relshipQuestionsAnswers', 'Від-й')->setWidth('90px'),
+            AdminColumnEditable::text('bal_q')->setLabel('Бал')->setWidth('50px'),
             AdminColumn::order('order_q')->setLabel('Порядок')->setWidth('90px'),
+
             AdminColumn::image('image_q', 'Світлина')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::datetime('created_at')->setLabel('Дата')->setWidth('90px'),
+//            AdminColumn::datetime('created_at')->setLabel('Дата')->setWidth('90px'),
         ];
 
         $display = AdminDisplay::datatables()
@@ -114,11 +117,13 @@ class Questions extends Section implements Initializable
      */
     public function onEdit($id = null, $payload = [])
     {
+
+        $tests= Test::pluck('title','id')->toArray();
+
         $form = AdminForm::panel();
         $form->setItems(
             AdminFormElement::columns()
-                ->addColumn(function () {
-                    return [
+                ->addColumn([
                         $question = AdminFormElement::text('text_q', 'Питання')
                             ->setHtmlAttribute('placeholder', 'Назва питання')
                             ->setHtmlAttribute('maxlength', '255')
@@ -128,39 +133,45 @@ class Questions extends Section implements Initializable
                             ]),
                         AdminFormElement::textarea('description_q','Опис')->setRows(2),
                         AdminFormElement::textarea('params_q','Параметри')->setRows(3),
-                        AdminFormElement::number('bal_q','Бал'),
+                        AdminFormElement::number('bal_q','Бал')->setDefaultValue(1),
                         $active = AdminFormElement::checkbox('active_q','Активный')
                             ->setValidationRules(['boolean']),
                         AdminFormElement::number('order_q','Порядок'),
                         AdminFormElement::image('image_q','Зображення'),
-                    ];
-                },'col-xs-3 col-sm-6 col-md-8 col-lg-3')->addColumn(function () {
-                    return [
+                        AdminFormElement::select('test_id', 'Тест', $tests)
+                            ->setDisplay('ПІБ')->required(),]
+                    ,'col-6')
+                ->addColumn([
                         AdminFormElement::hasMany('relshipQuestionsAnswers', [
                             AdminFormElement::text('text_a','Відповідь')
                                 ->setHtmlAttribute('placeholder','Відповідь')
-                                ->setHtmlAttribute('maxlength', '255')
+                                ->setHtmlAttribute('maxlength', '2000')
                                 ->setHtmlAttribute('minlength', '1')
                                 ->setValidationRules([
-                                    'required', 'string', 'between:1,255',
+                                    'required', 'string', 'between:1,2000',
                                 ]),
-                            AdminFormElement::number('bal_a','Бал')->required()
-                                ->setHtmlAttribute('placeholder',1)->setDefaultValue(1),
-                            AdminFormElement::checkbox('active_a')->setLabel('Видимість')
-//                                ->setHtmlAttribute('checked','true')
-                            ,
-                        AdminFormElement::image('image_a','Зображення'),
-                        ]),
-                    ];
-                },'col-xs-12 col-sm-6 col-md-8 col-lg-9')
-//                ->addColumn(function (){
-//                return [
-//                    AdminFormElement::hasMany('relshipQuestionsAnswers', [
-//                    AdminFormElement::text('text','Текст відповіді'),
-//                        ]),
-//                ];
-//            })
-        );
+                            AdminFormElement::number('bal_a','Бал')
+                                ->setDefaultValue(1)
+                                ->setMin(0)
+                                ->setHtmlAttribute('placeholder','введіть бал'),
+                            AdminFormElement::checkbox('active_a')->setLabel('Видимість'),
+                        AdminFormElement::image('image_a','Зображення')
+                        ])
+                ],'col-6'));
+
+        $form->getButtons()
+            ->setPlacements([
+//                'after' => ['title', 'date'],
+                'before' => ['text_q']
+            ]);
+        $table = AdminDisplay::table([
+            AdminColumn::action('export', 'Export')->setIcon('fa fa-share')->setAction('/#button')])
+            ->setColumns([
+                AdminColumn::checkbox(),]);
+
+        $table->getActions()
+            ->setPlacement('panel.buttons')
+            ->setHtmlAttribute('class', 'pull-right');
 
         return $form;
     }
@@ -168,11 +179,11 @@ class Questions extends Section implements Initializable
     /**
      * @return FormInterface
      */
-//    public function onCreate($payload = [])
-//    {
+    public function onCreate($payload = [])
+    {
 //        return "Питання створювати можна тільки в <a href=/admin/tests/>Тестах</a>";
-////        return $this->onEdit(null, $payload);
-//    }
+        return $this->onEdit(null, $payload);
+    }
 
     /**
      * @return bool

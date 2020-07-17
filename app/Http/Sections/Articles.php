@@ -94,7 +94,7 @@ class Articles extends Section implements Initializable
                 AdminFormElement::textarea('description', 'Опис')->setRows(2),
                 AdminFormElement::ckeditor('text', 'Текст'),
 
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-8')->addColumn([
+            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-2')->addColumn([
                 AdminFormElement::text('author', 'Автор'),
                 AdminFormElement::text('id', 'ID')->setReadonly(true),
                 AdminFormElement::image('image', 'Зображення'),

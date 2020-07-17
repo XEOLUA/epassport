@@ -65,7 +65,7 @@ class Tests extends Section implements Initializable
                 ->setOptions(['тест','анкета'])
                 ->setDisplay('Тип')
                 ->setTitle('Оберіть тип:'),
-            AdminColumnEditable::text('description', 'Опис'),
+//            AdminColumnEditable::text('description', 'Опис')->setWidth('200px'),
             AdminColumnEditable::checkbox('active', 'Відкрито')->setWidth('120px'),
             AdminColumn::count('relshipTestsQuestions', 'Питань'),
             AdminColumn::order('order')->setLabel('Порядок')->setWidth('90px'),
@@ -104,15 +104,18 @@ class Tests extends Section implements Initializable
                             ->setValidationRules([
                                 'required', 'string', 'between:1,255',
                             ]),
-                        AdminFormElement::textarea('description','Опис')->setRows(2),
-                        AdminFormElement::textarea('settings','Налаштування'),
+                        AdminFormElement::ckeditor('description','Опис'),
+                        AdminFormElement::textarea('settings','Налаштування: 
+                        ф-я/діапазон/підсумок/початок:кінець*назва|початок:кінець*назва|...
+                        '),
                         $active = AdminFormElement::checkbox('active','Активный')
                             ->setValidationRules(['boolean']),
                         AdminFormElement::number('order','Порядок'),
                         AdminFormElement::image('image','Зображення'),
                     ];
-                },'col-xs-3 col-sm-6 col-md-8 col-lg-3')->addColumn(function () {
+                },'col-xs-3 col-sm-6 col-md-8 col-lg-5')->addColumn(function () {
                     return [
+                        AdminFormElement::html("<a href='#bottom'>&darr;</a>"),
                         AdminFormElement::hasMany('relshipTestsQuestions', [
                         AdminFormElement::text('text_q','Питання')
                                 ->setHtmlAttribute('placeholder','Питання')
@@ -121,48 +124,40 @@ class Tests extends Section implements Initializable
                                 ->setValidationRules([
                                     'required', 'string', 'between:1,255',
                                 ]),
-                            AdminFormElement::number('bal_q','Бал')->required()->setDefaultValue(1),
+                            AdminFormElement::number('bal_q','Бал')->setHtmlAttribute('value',0),
                             AdminFormElement::select('type_q')->setLabel('Тип питання')
                                 ->setOptions(['Один', 'Багато', 'Відкрите'])
-                                ->setDisplay('Тип')
+                                ->setDisplay('Тип')->required()
 //                                ->setTitle('Оберіть тип:')
                             ,
-                        AdminFormElement::checkbox('active_q','Видимість'),
+                        AdminFormElement::checkbox('active_q','Видимість')->setHtmlAttribute('checked',true),
 //                        AdminFormElement::image('image','Зображення'),
                         ]),
                     ];
-                },'col-xs-12 col-sm-6 col-md-8 col-lg-9')
-//                ->addColumn(function (){
-//                return [
-//                    AdminFormElement::hasMany('relshipQuestionsAnswers', [
-//                    AdminFormElement::text('text','Текст відповіді'),
-//                        ]),
-//                ];
-//            })
+                },'col-xs-12 col-sm-6 col-md-8 col-lg-7')
         );
 
-        return $form;
+        $form->getButtons()
+            ->setPlacements([
+//                'after' => ['title', 'date'],
+                'before' => ['title']
+            ]);
+        $table = AdminDisplay::table([
+            AdminColumn::action('export', 'Export')->setIcon('fa fa-share')->setAction('/#button')])
+                ->setColumns([
+                AdminColumn::checkbox(),]);
 
-//        $form = AdminForm::card()->addBody([
-//                AdminFormElement::columns()->addColumn([
-//                AdminFormElement::text('title', 'Назва тесту')->required(),
-//                AdminFormElement::textarea('description', 'Опис')->setRows(7),
-//                AdminFormElement::checkbox('active', 'Відкрити'),
-//                AdminFormElement::number('order', 'Порядок'),
-//            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-8')->addColumn([
-//                AdminFormElement::text('id', 'ID')->setReadonly(true),
-//                AdminFormElement::image('image', 'Зображення'),
-//            ], 'col-xs-12 col-sm-6 col-md-8 col-lg-4'),
-//        ]);
-//
-//        $form->getButtons()->setButtons([
-//            'save'  => new Save(),
-//            'save_and_close'  => new SaveAndClose(),
-//            'save_and_create'  => new SaveAndCreate(),
-//            'cancel'  => (new Cancel()),
-//        ]);
-//
-//        return $form;
+        $table->getActions()
+            ->setPlacement('panel.buttons')
+            ->setHtmlAttribute('class', 'pull-right');
+
+
+        $form->setItems(
+            AdminFormElement::html("<a name='bottom'>bottom</a>")
+
+            );
+
+        return $form;
     }
 
     /**

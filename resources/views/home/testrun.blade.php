@@ -1,15 +1,18 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-9 p-lg-5 mx-auto my-5">
         <h2 class="display-4 font-weight-normal">{{['Тестування','Анкетування'][$test[0]->type]}}</h2>
-        <h3>"{{$test[0]->title}}"</h3>
         <h3>{{auth()->user()->name}}, {{auth()->user()->group}}, {{auth()->user()->year_in}}</h3>
+        <h3>"{{$test[0]->title}}"</h3>
+        <div>
+            {!! $test[0]->description !!}
+        </div>
         <form method="post" action="{{route('testsave',['test_id'=>$test[0]->id])}}">
             @csrf
         <table class="table table-striped table-sm text-left" style="border: 1px solid silver">
             <thead>
             <tr>
                 <th style="width: 1%">#</th>
-                <th>Назва анкети</th>
+                <th>Питання</th>
             </tr>
             </thead>
             <tbody>
