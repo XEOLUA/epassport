@@ -195,6 +195,50 @@ class StudentsController extends Controller
 
     }
 
+    public function listanketa($student_id){
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $student_id==auth()->user()->id))
+        {
+            $tests_id=TestInMenu::where('menuitem_id',10)->get()->pluck('test_id','test_id')->toArray();
+//            dd($tests_id);
+            $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
+            $tests = Test::whereIn('id',$tests_id)->get();
+//            dd($tests);
+            return view('listanketa',
+                [
+                    'tests'=>$tests,
+                    'student' => $student,
+                ]);
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
+
+    }
+
+    public function resultsspets($student_id){
+        if(auth()->check() && (auth()->user()->role==2 || auth()->user()->role==0 || $student_id==auth()->user()->id))
+        {
+
+            return "TO DO";
+//            $tests_id=TestInMenu::where('menuitem_id',9)->get()->pluck('test_id','test_id')->toArray();
+////            dd($tests_id);
+//            $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
+//            $tests = Test::whereIn('id',$tests_id)->get();
+////            dd($tests);
+//            return view('listpsihtest',
+//                [
+//                    'tests'=>$tests,
+//                    'student' => $student,
+//                ]);
+        } else
+        {
+            if(auth()->check()) return "Access denied! <p><a href='/'>Return to main page</a></p>";
+            else return redirect()->route('login');
+        }
+
+    }
+
 }
 
 
