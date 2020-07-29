@@ -117,20 +117,20 @@ class Tests extends Section implements Initializable
                     return [
                         AdminFormElement::html("<a href='#bottom'>&darr;</a>"),
                         AdminFormElement::hasMany('relshipTestsQuestions', [
-                        AdminFormElement::text('text_q','Питання')
+                            AdminFormElement::text('text_q','Питання')
                                 ->setHtmlAttribute('placeholder','Питання')
-                                ->setHtmlAttribute('maxlength', '255')
+                                ->setHtmlAttribute('maxlength', '2055')
                                 ->setHtmlAttribute('minlength', '1')
                                 ->setValidationRules([
-                                    'required', 'string', 'between:1,255',
+                                    'required', 'string', 'between:1,2055',
                                 ]),
-                            AdminFormElement::number('bal_q','Бал')->setHtmlAttribute('value',0),
+                            AdminFormElement::number('bal_q','Бал'),
                             AdminFormElement::select('type_q')->setLabel('Тип питання')
                                 ->setOptions(['Один', 'Багато', 'Відкрите'])
                                 ->setDisplay('Тип')->required()
 //                                ->setTitle('Оберіть тип:')
                             ,
-                        AdminFormElement::checkbox('active_q','Видимість')->setHtmlAttribute('checked',true),
+                            AdminFormElement::checkbox('active_q','Видимість')->setHtmlAttribute('checked',true),
 //                        AdminFormElement::image('image','Зображення'),
                         ]),
                     ];
@@ -144,7 +144,7 @@ class Tests extends Section implements Initializable
             ]);
         $table = AdminDisplay::table([
             AdminColumn::action('export', 'Export')->setIcon('fa fa-share')->setAction('/#button')])
-                ->setColumns([
+            ->setColumns([
                 AdminColumn::checkbox(),]);
 
         $table->getActions()
@@ -155,7 +155,7 @@ class Tests extends Section implements Initializable
         $form->setItems(
             AdminFormElement::html("<a name='bottom'>bottom</a>")
 
-            );
+        );
 
         return $form;
     }

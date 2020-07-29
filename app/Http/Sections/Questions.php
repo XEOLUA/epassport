@@ -142,21 +142,21 @@ class Questions extends Section implements Initializable
                             ->setDisplay('ПІБ')->required(),]
                     ,'col-6')
                 ->addColumn([
-                        AdminFormElement::hasMany('relshipQuestionsAnswers', [
-                            AdminFormElement::text('text_a','Відповідь')
-                                ->setHtmlAttribute('placeholder','Відповідь')
-                                ->setHtmlAttribute('maxlength', '2000')
-                                ->setHtmlAttribute('minlength', '1')
-                                ->setValidationRules([
-                                    'required', 'string', 'between:1,2000',
-                                ]),
-                            AdminFormElement::number('bal_a','Бал')
-                                ->setDefaultValue(1)
-                                ->setMin(0)
-                                ->setHtmlAttribute('placeholder','введіть бал'),
-                            AdminFormElement::checkbox('active_a')->setLabel('Видимість'),
+                    AdminFormElement::hasMany('relshipQuestionsAnswers', [
+                        AdminFormElement::text('text_a','Відповідь')
+                            ->setHtmlAttribute('placeholder','Відповідь')
+                            ->setHtmlAttribute('maxlength', '2000')
+                            ->setHtmlAttribute('minlength', '1')
+                            ->setValidationRules([
+                                'required', 'string', 'between:1,2000',
+                            ]),
+                        AdminFormElement::number('bal_a','Бал')
+                            ->setDefaultValue(1)
+                            ->setMin(-100)
+                            ->setHtmlAttribute('placeholder','введіть бал'),
+                        AdminFormElement::checkbox('active_a')->setLabel('Видимість'),
                         AdminFormElement::image('image_a','Зображення')
-                        ])
+                    ])
                 ],'col-6'));
 
         $form->getButtons()

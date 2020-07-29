@@ -7,14 +7,18 @@
             <tr>
                 <th>#</th>
                 <th>Назва анкети</th>
+                <th>Пройдено</th>
             </tr>
             </thead>
             <tbody>
-
             @foreach($tests as $key => $item)
                 <tr>
                     <td>{{$loop->index+1}}</td>
                     <td><a href="/test/results/{{$item->id}}/{{$student[0]->id}}">{{$item->title}}</a></td>
+                    <td align="center">@if(isset($tests_passed[0]) && in_array($item->id,$tests_passed[0]->toArray()))
+                            +
+                        @endif
+                    </td>
                 </tr>
             @endforeach
 
