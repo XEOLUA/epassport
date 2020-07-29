@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ambulcard;
 use App\Anamnest;
 use App\Menulist;
+use App\Result;
 use App\Test;
 use App\TestInMenu;
 use App\User;
@@ -180,10 +181,14 @@ class StudentsController extends Controller
 //            dd($tests_id);
             $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
             $tests = Test::whereIn('id',$tests_id)->get();
-//            dd($tests);
+            $tests_passed = Result::select('test_id')->where('user_id',$student_id)->get();
+            $u = $tests_passed->unique('test_id')->values()->all();
+
+//            dd($u);
             return view('listpsihtest',
                 [
                     'tests'=>$tests,
+                    'tests_passed'=>$u,
                     'student' => $student,
                 ]);
         } else
