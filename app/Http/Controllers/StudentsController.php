@@ -181,10 +181,9 @@ class StudentsController extends Controller
 //            dd($tests_id);
             $student = User::where('role',1)->where('id',$student_id)->where('status',1)->get();
             $tests = Test::whereIn('id',$tests_id)->get();
-            $tests_passed = Result::select('test_id')->where('user_id',$student_id)->get();
-            $u = $tests_passed->unique('test_id')->values()->all();
+            $tests_passed = Result::select('test_id')->where('user_id',$student_id)->get()->pluck('test_id');
+            $u = $tests_passed->unique()->values()->all();
 
-//            dd($u);
             return view('listpsihtest',
                 [
                     'tests'=>$tests,
