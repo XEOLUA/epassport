@@ -48,7 +48,6 @@ class StudentsController extends Controller
         {
             $students = User::where('role',1)->where('name','like',$alpha.'%')->where('status',1)->orderBy('name')->get();
 
-//            dd($students);
             return view('abetka',
                 [
                     'students'=>$students,
