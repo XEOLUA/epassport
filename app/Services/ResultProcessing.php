@@ -7,22 +7,27 @@ namespace App\Services;
 class ResultProcessing
 {
 
-   static function suma($ar_questions,$ar_results){
+   static function func($ar_questions,$ar_results,$function=null){
        $sum = 0;
+       $cnt = 0;
 //       dd($ar_results);
        unset($ar_results['_token']);
-//       foreach ($ar_questions as $question)
-       {
            foreach ($ar_results as $key => $res){
                if(in_array(key($res),$ar_questions))
                 foreach ($res as $r){
                     foreach ($r as $v)
-                    if(is_numeric($v)) $sum+=$v;
+                    if(is_numeric($v)) {
+                        $sum+=$v;
+                    }
                 }
            }
-       }
 //       dd($sum);
-       return $sum;
+       if($function=='sum' || $function==null) return $sum;
+       if($function=='average'){
+           if(count($ar_questions)>0) return round($sum/count($ar_questions),2);
+           else return false;
+       }
+
    }
 
 
@@ -47,7 +52,29 @@ class ResultProcessing
                         $ar_q[]=$param;
               }
 //              dd($ar_res);
-              $ans = self::suma($ar_q,$ar_res);
+              $ans = self::func($ar_q,$ar_res,'sum');
+              break;
+          }
+          case 'average':{
+              $ans = 0;
+              $params = explode(",",$ar_par[1]);
+              $ar_q=[];
+              foreach ($params as $param){
+                  if($param=='all'){
+                      foreach ($ar_res as $key => $res)
+                          if($key!='_token')$ar_q[]=key($res);
+                  } else
+                      if(strpos($param,"-"))
+                      {
+                          $q=explode("-",$param);
+                          for($i=1*$q[0];$i<=1*$q[1];$i++)
+                              $ar_q[]=$i;
+                      } else
+                          $ar_q[]=$param;
+              }
+//              dd($ar_res);
+              $ans = self::func($ar_q,$ar_res,'average');
+              break;
           }
       }
    return $ans;
@@ -80,7 +107,7 @@ class ResultProcessing
                          // break;
                       }
                   }
-              //Якщо результат не потрапив в жодин з проміжків буде виведенно ф-я та результат лбчислення
+              //Якщо результат не потрапив в жодин з проміжків буде виведенно ф-я та результат обчислення
               if($flag) $result.=$item[2]."(".$item[1].")=".$t."\n";
               }
               else //якщо не було таблиці підстановки
