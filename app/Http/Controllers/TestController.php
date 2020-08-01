@@ -26,8 +26,7 @@ class TestController extends Controller
             $test = Test::where('id',$test_id)->get();
 
 //            dd($res,$test);
-$proc=[];
-
+            $proc=[];
             if(count($res) && $test[0]->settings)
                 foreach ($res as $key =>$r){
                     $proc[$key] = ResultProcessing::processing(unserialize($r->answers),$test[0]->settings);
